@@ -31,7 +31,7 @@ SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
 
       nextScreen: Start(),
       splashTransition: SplashTransition.rotationTransition,
-      duration: 3,
+      duration: 30000,
     ),
 
   )

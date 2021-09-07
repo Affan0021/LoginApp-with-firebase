@@ -34,6 +34,10 @@ class _PhoneState extends State<Phone> {
   Widget build(BuildContext context)
   {
 
+    var query = MediaQuery.of(context);
+    var height = query.size.height;
+    // var container = height;
+    var width =  query.size.width;
 
     return Scaffold(
 
@@ -42,100 +46,163 @@ class _PhoneState extends State<Phone> {
               //      Column(
                 children: [
 
+                  Container(
+                    margin:  const EdgeInsets.fromLTRB(0, 0, 0, 0),
+//alignment: Alignment.center,
+
+                    width: MediaQuery.of(context).size.width,
+                    height:MediaQuery.of(context).size.height,
+                    decoration:   BoxDecoration(
+//   shape: BoxShape.circle,
+                      image:  const DecorationImage(
+                        fit: BoxFit.cover,
+                        image: AssetImage('user/log.jpg'),
+
+                      ),
 
 
-                  // Container(
-                  //   margin: EdgeInsets.fromLTRB(20, 300, 0, 0),
-                  //   child: TextField(
-                  //     // obscureText: true,
-                  //     style: TextStyle(
-                  //       color: Colors.black,
-                  //       fontSize: 20,
-                  //       fontFamily: 'OpenSans',
-                  //     ),
-                  //     controller: _emailTEC,
-                  //     //   keyboardType: TextInputType.emailAddress,
-                  //     decoration: InputDecoration(
-                  //       border: InputBorder.none,
-                  //       contentPadding: EdgeInsets.only(top: 14.0),
-                  //       // prefixIcon: Icon(
-                  //       //   Icons.lock,
-                  //       //   color: Colors.white,
-                  //       // ),
-                  //       hintText: 'Enter your Phone number ',
-                  //       hintStyle: TextStyle(
-                  //         color: Colors.white, // <-- Change this
-                  //         fontSize: null,
-                  //         fontWeight: FontWeight.w400,
-                  //         fontStyle: FontStyle.normal,
-                  //       ),
-                  //     ),
-                  //
-                  //        maxLength: 10,
-                  //        keyboardType: TextInputType.number,
-                  //        // controller: _controller,
-                  //   ),
-                  //   decoration: BoxDecoration(
-                  //     border: Border.all(
-                  //       color: Colors.blueAccent,
-                  //       width: 5,
-                  //     ),
-                  //     borderRadius: BorderRadius.circular(10),
-                  //     color: const Color(0xff7cb1b6),
-                  //   ),
-                  // ),
-                  //
+                    ),
 
-                  // SizedBox(
-                  //   height: 100,
-                  // ),
+                  ),
+
+
+           Column(
+             children: [
+
+               SizedBox(
+                 height: height/2.3,
+               ),
+
+
+               Container(
+                 //alignment: Alignment.center,
+                 margin:  const EdgeInsets.fromLTRB(40, 0, 0, 0),
+
+                 width: MediaQuery.of(context).size.width/1.17,
+                 height: MediaQuery.of(context).size.height/17,
+                 decoration:   BoxDecoration(
+                     boxShadow: [
+                       BoxShadow(
+                         color: Colors.transparent,
+                         offset: const Offset(
+                           100.0,
+                           10.0,
+                         ), //Offset
+                         blurRadius: 4.0,
+                         spreadRadius: 0.11,
+                       ), //BoxShadow
+                       BoxShadow(
+                         color: Colors.yellow,
+                         offset: const Offset(0.0, 0.0),
+                         blurRadius: 0.0,
+                         spreadRadius: 0.0,
+                       ),
+                       //BoxShadow
+                     ],
+                     border: Border.all(
+                       color: Colors.transparent,
+                       width: 4,
+                     ),
+                     borderRadius:  const BorderRadius.all(Radius.circular(10))
+                 ),
+               ),
+
+
+
+
+             ],
+           ),
+
+
+
+           Column(
+             children: [
+
+
+                    SizedBox(
+                      height: height/6,
+                    ),
+
                   Container(
 
-                    margin:EdgeInsets.fromLTRB(10, 200, 0, 0),
+                    margin:EdgeInsets.fromLTRB(50, 200, 0, 0),
 
                     child : InternationalPhoneInput(
 
-                        decoration: InputDecoration.collapsed(hintText: 'Enter your number'),
+                        decoration: InputDecoration.collapsed(
+                          hintText: 'Enter your number',
+                        hintStyle: TextStyle(
+
+                          color: Colors.black,
+                          fontSize: 20,
+                        ),
+                        // fillColor: Colors.brown,
+                        ),
                         onPhoneNumberChange: onPhoneNumberChange,
                         initialPhoneNumber: phone,
                         initialSelection: 'PAK',
-                        enabledCountries: ['+92', '+1', '+91' , '90'],
-                        showCountryCodes: true
+                        enabledCountries: ['+92', '+1', '+91' , '90', '99', '97', '60', '70', '80'],
+                        showCountryCodes: true,
+
                     ),
                   ),
+
+
+               SizedBox(
+                 height: height/14,
+               ),
 
                   Container(
-                    margin: EdgeInsets.fromLTRB(20, 380, 0, 0),
-                    child: ElevatedButton(
-                      onPressed: ()
-                      {
-                        // var _email = _emailTEC.text;
-                        //  print(_email);
+                      width: MediaQuery.of(context).size.width/2,
+                      height: MediaQuery.of(context).size.height/22,
+                      margin: const EdgeInsets.only(left: 5.0),
+                      child: ElevatedButton(
+                        onPressed: ()
 
-                        //   Search();
+                        {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => Search(  title: phone,)),
+                          );
 
-                        // title: _email
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => Search(  title: phone,)),
-                        );
-
+                        },
 
 
-                      },
-                      child: Text(
-                        'Search',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontFamily: 'OpenSans',
-                          fontSize: 15.0,
-                          fontWeight: FontWeight.bold,
+                        style: ButtonStyle(
+
+                          backgroundColor: MaterialStateProperty.resolveWith<Color>(
+                                (Set<MaterialState> states) {
+                              if (states.contains(MaterialState.pressed))
+                                return Colors.white;
+                              return Colors.indigoAccent;
+                            },
+                          ),
+                          shape:
+                          MaterialStateProperty.all<RoundedRectangleBorder>(
+                              RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(30.0),
+                                  side: BorderSide(
+                                      color: Colors.white)
+                              )
+                          ),
+
                         ),
-                      ),
-                    ),
-                  ),
+
+                        child: Text(
+                          '\tSend ',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontFamily: 'OpenSans',
+                            fontSize: 25.0,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      )
+                  )
 
 
+             ],
+           )
 
 
 

@@ -16,7 +16,7 @@ class GoogleLoginApp extends StatefulWidget {
 
 class _GoogleLoginAppState extends State<GoogleLoginApp> {
   GoogleSignIn _googleSignIn = GoogleSignIn(scopes: ['email']);
-  final auth = FirebaseAuth.instance;
+  //final auth = FirebaseAuth.instance;
   @override
   Widget build(BuildContext context) {
     GoogleSignInAccount? user = _googleSignIn.currentUser;
@@ -32,7 +32,7 @@ class _GoogleLoginAppState extends State<GoogleLoginApp> {
 
     return  Scaffold(
         appBar: AppBar(
-          title: Text(' Logged ' + (user == null ? 'out' : 'in') ),
+          title: Text('Google Demo (Logged ' + (user == null ? 'out' : 'in') + ')'),
           backgroundColor: Colors.blueGrey,
           toolbarHeight: 50,
 
@@ -162,6 +162,7 @@ class _GoogleLoginAppState extends State<GoogleLoginApp> {
                           child: ElevatedButton(
                               onPressed: user == null ? null : () async {
                                 await _googleSignIn.signOut();
+
                                 // setState(() {});
                               },
 

@@ -35,7 +35,11 @@ class _SearchState extends State<Search> {
 
 
   Widget build(BuildContext context) {
-    //  var widget;
+
+    var query = MediaQuery.of(context);
+    var height = query.size.height;
+    // var container = height;
+    var width =  query.size.width;
 
     return Scaffold(
         key: _scaffoldkey,
@@ -45,36 +49,85 @@ class _SearchState extends State<Search> {
                 children: [
 
                   Container(
-                    padding: const EdgeInsets.fromLTRB(80, 400, 0, 0),
+                    margin:  const EdgeInsets.fromLTRB(0, 0, 0, 0),
+                    width: MediaQuery.of(context).size.width,
+                    height:MediaQuery.of(context).size.height,
+                    decoration:   BoxDecoration(
+                      image:  const DecorationImage(
+                        fit: BoxFit.cover,
+                        image: AssetImage('user/log.jpg'),
 
-                    child: Text(
-                      '${widget.title}',
-                      style: TextStyle(
-                        color: Colors.black87,
-                        fontFamily: 'OpenSans',
-                        fontSize: 25.0,
-                        fontWeight: FontWeight.bold,
                       ),
+
                     ),
 
                   ),
 
-                  Padding(
+
+                  Column(
+
+                    children: [
+
+                      SizedBox(
+                        height: height/5,
+                      ),
+
+                      Container(
+                        margin:  const EdgeInsets.fromLTRB(0, 0, 130,0),
+                        width: MediaQuery.of(context).size.width/2,
+                        height: MediaQuery.of(context).size.height/10,
+                        color: Colors.transparent,
+                        child: const Text(
+                          'Enter\nPincode',
+                          style: TextStyle(
+
+                            color: Colors.white,
+                            fontFamily: 'OpenSans',
+                            fontSize: 30.0,
+                            fontWeight: FontWeight.bold,
+
+
+                          ),
+
+
+                        ),
+
+
+                      ),
+
+
+
+                  Container(
                     padding: const EdgeInsets.fromLTRB(10, 100, 0, 0),
+
                     child: PinPut(
-                      fieldsCount: 6,
+                      fieldsCount: 4,
                       withCursor: true,
+                      
                       textStyle: const TextStyle(
-                          fontSize: 25.0, color: Colors.white),
-                      eachFieldWidth: 40.0,
-                      eachFieldHeight: 55.0,
-                      // onSubmit: (String pin) => _showSnackBar(pin),
+                          fontSize: 25.0,
+                          color: Colors.red,
+                      ),
+                      eachFieldWidth: 30.0,
+                      eachFieldHeight: 60.0,
+                      fieldsAlignment: MainAxisAlignment.spaceEvenly,
+                      // onSubmit: (String pin) => _showSnackBar(p
                       focusNode: _pinPutFocusNode,
                       controller: _pinPutController,
-                      submittedFieldDecoration: pinPutDecoration,
-                      selectedFieldDecoration: pinPutDecoration,
-                      followingFieldDecoration: pinPutDecoration,
+                      submittedFieldDecoration: pinPutDecoration.copyWith(
+                        borderRadius: BorderRadius.circular(15.0),
+                      ),
+                      selectedFieldDecoration: pinPutDecoration.copyWith(color: Colors.tealAccent),
+                      followingFieldDecoration: pinPutDecoration.copyWith(
+                        borderRadius: BorderRadius.circular(10.0),
+                        color: Colors.white,
+                        border: Border.all(
+                          color: Colors.black,
+                          width: 3,
+                        ),
+                      ),
                       pinAnimationType: PinAnimationType.fade,
+
                       onSubmit: (pin) async {
                         try {
                           await FirebaseAuth.instance
@@ -102,6 +155,9 @@ class _SearchState extends State<Search> {
 
                   ),
 
+
+                    ],
+                  )
 
                 ]
 
